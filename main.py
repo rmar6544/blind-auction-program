@@ -1,21 +1,41 @@
+#imports
 from replit import clear
-#HINT: You can call clear() to clear the output in the console.
 from art import logo
-clear()
-print(logo)
+
+#create an empty dictionary
+bidder_dic = {}
+
+#while loop true statment
 bid = True
 while bid == True:
-  bidders_name = input("what is your name? ")
-  bid_amount = input("Enter your bid amount: ")
-  bidder_dic = {}
-  bidder_dic[bidders_name]= bid_amount
-  bidder_dic += 1
-  other_bidders = input("Are there other bidders? type 'yes' or 'no'").lower()
+  print(logo)
+
+#ask user for name and bid amout as input
+  bidders_name = input("What is your name? ")
+  bid_amount = int(input("Enter your bid amount: "))
+
+#update empty dictionary
+  bidder_dic.update({bidders_name:bid_amount}) 
+
+#ask for other bidders as input
+  other_bidders = input("Are there other bidders? type 'yes' or 'no'\n").lower()
+
+#clear board to wipe inputted amount off screen
   if other_bidders == "yes":
     clear()
   elif other_bidders == "no":
-    for key in bidder_dic:
-      if bidder_dic[key] > 0:
-        print(f"{bidder_dic[key]} is the winning bidder." )
-        bid = False
-  print(bidder_dic)      
+    clear()
+
+# get max key and values
+    max_key = max(bidder_dic, key=bidder_dic.get)
+    max_value = max(bidder_dic.values())
+
+#print the max values  
+    print(f"{max_key} is the winning bidder with ${max_value}.\n" )
+    
+#ask for restart  
+    restart_bid = input("Would you like to start a new silent bid 'yes' or 'no'? ")
+    if restart_bid == "no":
+      bid = False
+    else:
+      bid = True  
